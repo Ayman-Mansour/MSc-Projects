@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\AYMAN MNSOR\Desktop\TODO\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\AYMAN MNSOR\Desktop\TODO\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_d42ae34ad93876500b408cca2755fb46686ff468\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\AYMAN MNSOR\Desktop\TODO\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="37ef84dee1bc938ba3d351792556d017c2def5a9">
+        <dex dex="C:\Users\AYMAN MNSOR\Desktop\TODO\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_09303e8297be702ae047aec4be458fabbd653616\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\AYMAN MNSOR\Desktop\TODO\app\libs\ksoap2-android-assembly-3.1.1-jar-with-dependencies.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ddcd1698b4bc242e26bfd99e3779688ab311b918">
+        <dex dex="C:\Users\AYMAN MNSOR\Desktop\TODO\app\build\intermediates\transforms\dex\debug\folders\1000\2\ksoap2-android-assembly-3.1.1-jar-with-dependencies_6f143383519dbedfc42a5136c4b066b3bcd65300\classes.dex" />
+    </item>
+
+</items>
