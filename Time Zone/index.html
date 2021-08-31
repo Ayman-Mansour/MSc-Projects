@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="markup.css">
+</head>
+<body>
+<header>
+        <h1>TimeZone App</h1><br>
+     <div>
+    <input type="text" id="address" name="address" placeholder="Please enter a location">
+       <input type="submit" id="submit" value="Ok">
+    </div>
+    </header>
+    
+  
+    <div id="map"></div>
+ 
+     <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: -34.397, lng: 150.644}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+              var latitude = results[0].geometry.location.lat();
+              var longtitude = results[0].geometry.location.lng();
+//              alert("long and lat"+longtitude+latitude);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location,
+              animation: google.maps.Animation.BOUNCE,
+            icon: {
+		path:' M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
+		fillColor: '#85DA7A',
+		fillOpacity: 1,
+		strokeColor: '#65A95C',
+		strokeWeight: 3
+	}
+                      
+          });
+              
+              google.maps.event.addListener(marker,'click',function() {
+		 	 timezone(marker,latitude,longtitude);
+		    });  
+          
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+        function timezone(marker,latitude,longtitude){
+		try{
+		
+			xmlhttp = new XMLHttpRequest();
+		}catch(e){
+		}
+
+
+
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		
+					var summery = "";
+//                    var parser = new DOMParser();
+//                    var xmlDoc = parser.parseFromString(xmlhttp.responseText, "text/xml");
+					var obj = xmlhttp.responseXML;
+//                    alert("the response "+obj);
+                    var time = obj.getElementsByTagName("time")[0].childNodes[0].nodeValue;
+                    var sunset = obj.getElementsByTagName("sunset")[0].childNodes[0].nodeValue;
+                    var sunrise = obj.getElementsByTagName("sunrise")[0].childNodes[0].nodeValue;
+                    var post = "Time : "+time+"<br>Sunrise : "+sunrise+"<br>Sunset : "+sunset;
+		            var infoWindow = new google.maps.InfoWindow({
+		                content: "Time : "+time+"<br>Sunrise : "+sunrise+"<br>Sunset : "+sunset,		            
+		             });
+		              document.getElementById("post").innerHTML = post ;
+		            google.maps.event.addListener(marker, 'click', function () {
+		                infoWindow.open(map, marker);
+		            });					
+				
+		
+				
+				return false;
+			}		
+		}		
+		
+		var url = "http://api.geonames.org/timezone?lat="+latitude+"&lng="+longtitude+"&username=************";
+		xmlhttp.open("GET",url,true);
+		xmlhttp.send();
+		return false;	
+	}	
+         function Facebook(){
+	 var Mymessage = document.getElementById("post").value;
+	  FB.login(function(){
+	  // Note: The call will only work if you accept the permission request
+	  FB.api('/me/feed', 'post', {message: Mymessage });
+	}, {scope: 'publish_actions'});  
+	return false;
+   }
+
+     window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '*************************',
+      xfbml      : true,
+      version    : 'v2.9'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+ 
+    </script>
+     <footer>
+        
+       <p name="post" id="post">
+                    <button name="facebook" id="facebook" class="button" onclick="Facebook()"> facebook </button>
+      
+    </footer>
+    
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=********************************************&callback=initMap">
+    </script>
+   
+   
+</body>
+
+</html>
